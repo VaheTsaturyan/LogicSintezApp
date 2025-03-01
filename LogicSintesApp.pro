@@ -19,7 +19,12 @@ SOURCES += \
     Application/src/GUI/Components/dockWidget.cpp \
     Application/src/GUI/Components/fileDialog.cpp \
     Application/src/GUI/Components/toolBar.cpp \
-    Application/src/GUI/Components/menu.cpp
+    Application/src/GUI/Components/menu.cpp \
+    Application/src/GUI/Components/circuitdesignview.cpp \
+    Application/src/GUI/Components/graphicItem.cpp \
+    Application/src/GUI/Components/graphicScen.cpp
+
+
 
 # Header files
 HEADERS += \
@@ -28,7 +33,10 @@ HEADERS += \
     Application/inc/GUI/Components/dockWidget.h \
     Application/inc/GUI/Components/fileDialog.h \
     Application/inc/GUI/Components/toolBar.h \
-    Application/inc/GUI/Components/menu.h
+    Application/inc/GUI/Components/menu.h\
+    Application/inc/GUI/Components/circuitdesignview.h\
+    Application/inc/GUI/Components/graphicItem.h\
+    Application/inc/GUI/Components/graphicScen.h
 
 # Resources
 RESOURCES += \
