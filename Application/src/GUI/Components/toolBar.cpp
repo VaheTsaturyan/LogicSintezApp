@@ -88,7 +88,7 @@ void AddProjectToolBar::setupActions()
    
     
     connect( addProject, &QAction::triggered, this, [this]() {
-        emit actionTriggered("addProject");
+        emit actionTriggered();
     });
  
     addAction(addProject);

@@ -53,23 +53,27 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../Application/main.cpp \
+		../Application/src/application.cpp \
 		../Application/src/GUI/mainWindow.cpp \
 		../Application/src/GUI/Components/dockWidget.cpp \
 		../Application/src/GUI/Components/fileDialog.cpp \
 		../Application/src/GUI/Components/toolBar.cpp \
 		../Application/src/GUI/Components/menu.cpp qrc_Resources.cpp \
+		moc_application.cpp \
 		moc_mainWindow.cpp \
 		moc_dockWidget.cpp \
 		moc_fileDialog.cpp \
 		moc_toolBar.cpp \
 		moc_menu.cpp
 OBJECTS       = main.o \
+		application.o \
 		mainWindow.o \
 		dockWidget.o \
 		fileDialog.o \
 		toolBar.o \
 		menu.o \
 		qrc_Resources.o \
+		moc_application.o \
 		moc_mainWindow.o \
 		moc_dockWidget.o \
 		moc_fileDialog.o \
@@ -152,11 +156,13 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../../LogicSintesApp.pro ../Application/inc/GUI/mainWindow.h \
+		../../LogicSintesApp.pro ../Application/inc/application.h \
+		../Application/inc/GUI/mainWindow.h \
 		../Application/inc/GUI/Components/dockWidget.h \
 		../Application/inc/GUI/Components/fileDialog.h \
 		../Application/inc/GUI/Components/toolBar.h \
 		../Application/inc/GUI/Components/menu.h ../Application/main.cpp \
+		../Application/src/application.cpp \
 		../Application/src/GUI/mainWindow.cpp \
 		../Application/src/GUI/Components/dockWidget.cpp \
 		../Application/src/GUI/Components/fileDialog.cpp \
@@ -348,8 +354,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../Resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Application/inc/GUI/mainWindow.h ../Application/inc/GUI/Components/dockWidget.h ../Application/inc/GUI/Components/fileDialog.h ../Application/inc/GUI/Components/toolBar.h ../Application/inc/GUI/Components/menu.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Application/main.cpp ../Application/src/GUI/mainWindow.cpp ../Application/src/GUI/Components/dockWidget.cpp ../Application/src/GUI/Components/fileDialog.cpp ../Application/src/GUI/Components/toolBar.cpp ../Application/src/GUI/Components/menu.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Application/inc/application.h ../Application/inc/GUI/mainWindow.h ../Application/inc/GUI/Components/dockWidget.h ../Application/inc/GUI/Components/fileDialog.h ../Application/inc/GUI/Components/toolBar.h ../Application/inc/GUI/Components/menu.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Application/main.cpp ../Application/src/application.cpp ../Application/src/GUI/mainWindow.cpp ../Application/src/GUI/Components/dockWidget.cpp ../Application/src/GUI/Components/fileDialog.cpp ../Application/src/GUI/Components/toolBar.cpp ../Application/src/GUI/Components/menu.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -391,9 +397,14 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -std=gnu++1z -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainWindow.cpp moc_dockWidget.cpp moc_fileDialog.cpp moc_toolBar.cpp moc_menu.cpp
+compiler_moc_header_make_all: moc_application.cpp moc_mainWindow.cpp moc_dockWidget.cpp moc_fileDialog.cpp moc_toolBar.cpp moc_menu.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainWindow.cpp moc_dockWidget.cpp moc_fileDialog.cpp moc_toolBar.cpp moc_menu.cpp
+	-$(DEL_FILE) moc_application.cpp moc_mainWindow.cpp moc_dockWidget.cpp moc_fileDialog.cpp moc_toolBar.cpp moc_menu.cpp
+moc_application.cpp: ../Application/inc/application.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/vts/repos/LogicSintesApp/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/vts/repos/LogicSintesApp -I/home/vts/repos/LogicSintesApp/Application/inc -I/home/vts/repos/LogicSintesApp/Application/inc/GUI -I/home/vts/repos/LogicSintesApp/Application/inc/GUI/Components -I/home/vts/repos/LogicSintesApp/Application/inc/Dacumemnt -I/home/vts/repos/LogicSintesApp/Application/inc/Menegment -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Application/inc/application.h -o moc_application.cpp
+
 moc_mainWindow.cpp: ../Application/inc/GUI/mainWindow.h \
 		../Application/inc/GUI/Components/dockWidget.h \
 		../Application/inc/GUI/Components/fileDialog.h \
@@ -443,8 +454,12 @@ main.o: ../Application/main.cpp ../Application/inc/GUI/mainWindow.h \
 		../Application/inc/GUI/Components/dockWidget.h \
 		../Application/inc/GUI/Components/fileDialog.h \
 		../Application/inc/GUI/Components/toolBar.h \
-		../Application/inc/GUI/Components/menu.h
+		../Application/inc/GUI/Components/menu.h \
+		../Application/inc/application.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Application/main.cpp
+
+application.o: ../Application/src/application.cpp ../Application/inc/application.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o application.o ../Application/src/application.cpp
 
 mainWindow.o: ../Application/src/GUI/mainWindow.cpp ../Application/inc/GUI/mainWindow.h \
 		../Application/inc/GUI/Components/dockWidget.h \
@@ -456,7 +471,8 @@ mainWindow.o: ../Application/src/GUI/mainWindow.cpp ../Application/inc/GUI/mainW
 dockWidget.o: ../Application/src/GUI/Components/dockWidget.cpp ../Application/inc/GUI/Components/dockWidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dockWidget.o ../Application/src/GUI/Components/dockWidget.cpp
 
-fileDialog.o: ../Application/src/GUI/Components/fileDialog.cpp ../Application/inc/GUI/Components/fileDialog.h
+fileDialog.o: ../Application/src/GUI/Components/fileDialog.cpp ../Application/inc/GUI/Components/fileDialog.h \
+		../Application/inc/application.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fileDialog.o ../Application/src/GUI/Components/fileDialog.cpp
 
 toolBar.o: ../Application/src/GUI/Components/toolBar.cpp ../Application/inc/GUI/Components/toolBar.h
@@ -467,6 +483,9 @@ menu.o: ../Application/src/GUI/Components/menu.cpp ../Application/inc/GUI/Compon
 
 qrc_Resources.o: qrc_Resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_Resources.o qrc_Resources.cpp
+
+moc_application.o: moc_application.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_application.o moc_application.cpp
 
 moc_mainWindow.o: moc_mainWindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainWindow.o moc_mainWindow.cpp

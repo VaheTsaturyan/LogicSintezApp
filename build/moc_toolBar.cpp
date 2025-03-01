@@ -244,8 +244,8 @@ void gui::ZoomToolBar::actionTriggered(const QString & _t1)
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 struct qt_meta_stringdata_gui__AddProjectToolBar_t {
-    QByteArrayData data[4];
-    char stringdata0[51];
+    QByteArrayData data[3];
+    char stringdata0[40];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -256,12 +256,11 @@ static const qt_meta_stringdata_gui__AddProjectToolBar_t qt_meta_stringdata_gui_
     {
 QT_MOC_LITERAL(0, 0, 22), // "gui::AddProjectToolBar"
 QT_MOC_LITERAL(1, 23, 15), // "actionTriggered"
-QT_MOC_LITERAL(2, 39, 0), // ""
-QT_MOC_LITERAL(3, 40, 10) // "actionName"
+QT_MOC_LITERAL(2, 39, 0) // ""
 
     },
     "gui::AddProjectToolBar\0actionTriggered\0"
-    "\0actionName"
+    ""
 };
 #undef QT_MOC_LITERAL
 
@@ -279,10 +278,10 @@ static const uint qt_meta_data_gui__AddProjectToolBar[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   19,    2, 0x06 /* Public */,
+       1,    0,   19,    2, 0x06 /* Public */,
 
  // signals: parameters
-    QMetaType::Void, QMetaType::QString,    3,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -293,19 +292,20 @@ void gui::AddProjectToolBar::qt_static_metacall(QObject *_o, QMetaObject::Call _
         auto *_t = static_cast<AddProjectToolBar *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->actionTriggered((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 0: _t->actionTriggered(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (AddProjectToolBar::*)(const QString & );
+            using _t = void (AddProjectToolBar::*)();
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&AddProjectToolBar::actionTriggered)) {
                 *result = 0;
                 return;
             }
         }
     }
+    (void)_a;
 }
 
 QT_INIT_METAOBJECT const QMetaObject gui::AddProjectToolBar::staticMetaObject = { {
@@ -349,10 +349,9 @@ int gui::AddProjectToolBar::qt_metacall(QMetaObject::Call _c, int _id, void **_a
 }
 
 // SIGNAL 0
-void gui::AddProjectToolBar::actionTriggered(const QString & _t1)
+void gui::AddProjectToolBar::actionTriggered()
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
-    QMetaObject::activate(this, &staticMetaObject, 0, _a);
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

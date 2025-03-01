@@ -9,9 +9,12 @@
 
 namespace gui
 {
-
     
 
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////
+/////////////////////////////////////////////////////////////////////////////////////////////
 LogicGateItem::LogicGateItem(QTreeWidget *parent, const QString &name, const QString &imagePath)
     : QTreeWidgetItem(parent), m_name(name), m_imagePath(imagePath) {
     setText(0, name);
@@ -26,6 +29,14 @@ QString LogicGateItem::imagePath() const {
     return m_imagePath; 
 }
 
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////
+/////////////////////////////////////////////////////////////////////////////////////////////
 LogicGatesDockWidget::LogicGatesDockWidget(QWidget *parent) 
     : QDockWidget("Logic Gate Palette", parent) {
     // Set fixed size for the dock widget
@@ -131,5 +142,8 @@ void LogicGatesDockWidget::addLogicGate(const QString &name, const QString &imag
     LogicGateItem *item = new LogicGateItem(m_logicGatesTree, name, imagePath);
     m_logicGatesTree->addTopLevelItem(item);
 }
+
+
+
 
 } // namespace gui

@@ -1,8 +1,8 @@
 #include "./inc/GUI/mainWindow.h"
-#include <QApplication>
+#include "./inc/application.h"
 
 int main(int argc, char *argv[]){
-    QApplication *app = new QApplication(argc, argv);
+    MyApplication *app = new MyApplication(argc, argv);
     gui::MainWindow *win = new gui::MainWindow();
     win->show();
     return app->exec();

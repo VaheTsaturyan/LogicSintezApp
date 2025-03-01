@@ -1,6 +1,8 @@
 #include "../../../inc/GUI/Components/fileDialog.h"
 #include <QFileInfo>
 
+#include "../../../inc/application.h"
+
 
 
 namespace gui
@@ -22,6 +24,8 @@ SaveJsonFileDialog::SaveJsonFileDialog(QWidget* parent)
     setWindowTitle("Save JSON File");
     setupUI();
     connectSignals();
+
+    QObject::connect(this, &SaveJsonFileDialog::jsonFilePathSelected, MyApplication::instance(), &MyApplication::saveJsonFile);
 }
 
 SaveJsonFileDialog::~SaveJsonFileDialog() {
@@ -105,6 +109,9 @@ JsonFileDialog::JsonFileDialog(QWidget* parent)
     : QFileDialog(parent)
 {
     setupDialog();
+
+    QObject::connect(this, &JsonFileDialog::jsonFileSelected, MyApplication::instance(), &MyApplication::openJsonFile);
+
 }
 
 void JsonFileDialog::setupDialog()
@@ -158,6 +165,9 @@ AddProjectFileDialog::AddProjectFileDialog(QWidget* parent)
     : QFileDialog(parent)
 {
     setupDialog();
+    
+    QObject::connect(this, &AddProjectFileDialog::jsonFileSelected, MyApplication::instance(), &MyApplication::addProjectJsonFile);
+
 }
 
 void AddProjectFileDialog::setupDialog()

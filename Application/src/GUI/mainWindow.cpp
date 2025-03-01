@@ -2,6 +2,7 @@
 #include <QMenuBar>
 #include <QMenu>
 #include <QDebug>
+#include "mainWindow.h"
 
 namespace gui
 {
@@ -14,10 +15,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     
     // Connect signals from the file menu to slots in MainWindow
-    connect(fileMenu, &FileMenu::newFileRequested, this, &MainWindow::newFile);
-    connect(fileMenu, &FileMenu::openFileRequested, this, &MainWindow::openFile);
-    connect(fileMenu, &FileMenu::saveFileRequested, this, &MainWindow::saveFile);
-    connect(fileMenu, &FileMenu::exitRequested, this, &MainWindow::close);
+    connect(fileMenu,   &FileMenu::newFileRequested,            this, &MainWindow::newFile);
+    connect(fileMenu,   &FileMenu::openFileRequested,           this, &MainWindow::openFile);
+    connect(fileMenu,   &FileMenu::saveFileRequested,           this, &MainWindow::saveFile);
+    connect(fileMenu,   &FileMenu::exitRequested,               this, &MainWindow::close);
+    connect(addProject, &AddProjectToolBar::actionTriggered,    this, &MainWindow::addProjectDialog);
 }
 
 void MainWindow::initComponents()
@@ -58,6 +60,10 @@ void MainWindow::saveFile()
     savedialog->show();
 }
 
-
+void MainWindow::addProjectDialog()
+{
+    AddProjectFileDialog* addProjectDialog = new AddProjectFileDialog(this);
+    addProjectDialog->show();
+}
 
 } // namespace gui

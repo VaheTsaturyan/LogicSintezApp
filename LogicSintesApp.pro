@@ -14,6 +14,7 @@ INCLUDEPATH += Application/inc \
 # Source files
 SOURCES += \
     Application/main.cpp \
+    Application/src/application.cpp \
     Application/src/GUI/mainWindow.cpp \
     Application/src/GUI/Components/dockWidget.cpp \
     Application/src/GUI/Components/fileDialog.cpp \
@@ -22,6 +23,7 @@ SOURCES += \
 
 # Header files
 HEADERS += \
+    Application/inc/application.h\
     Application/inc/GUI/mainWindow.h \
     Application/inc/GUI/Components/dockWidget.h \
     Application/inc/GUI/Components/fileDialog.h \

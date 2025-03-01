@@ -25,13 +25,12 @@ class LogicGatesDockWidget : public QDockWidget {
 
 public:
     LogicGatesDockWidget(QWidget *parent = nullptr);
-
+    
 signals:
     void logicGateSelected(const QString &gateName);
-
-protected:
+    protected:
     bool eventFilter(QObject *watched, QEvent *event) override;
-
+    
 private slots:
     void filterItems(const QString &text);
 

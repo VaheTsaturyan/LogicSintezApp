@@ -54,7 +54,7 @@ public:
     explicit AddProjectToolBar(QWidget *parent = nullptr);
     
     signals:
-    void actionTriggered(const QString& actionName);
+    void actionTriggered();
     
     private:
     QAction* addProject;
