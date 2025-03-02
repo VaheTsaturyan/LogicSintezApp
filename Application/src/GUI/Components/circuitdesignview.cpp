@@ -35,19 +35,21 @@ void CircuitDesignView::zoomIn()
 {
     m_zoomLevel *= 1.2;
     m_view->scale(1.2, 1.2);
+
 }
 
 void CircuitDesignView::zoomOut()
 {
     m_zoomLevel *= 0.8;
     m_view->scale(0.8, 0.8);
+
 }
 
 void CircuitDesignView::resetZoom()
 {
-    // Reset to original scale
     m_view->resetTransform();
     m_zoomLevel = 1.0;
+    
 }
 
 void CircuitDesignView::clearScene()
@@ -58,6 +60,7 @@ void CircuitDesignView::clearScene()
 void CircuitDesignView::addLogicGate(const QString &gateType)
 {
     // Create a scalable graphics item styled as a logic gate
+    //AndGraphicsItem *item = m_scene->addScalableItem();
     ScalableGraphicsItem *item = m_scene->addScalableItem();
     
     // Position at view center

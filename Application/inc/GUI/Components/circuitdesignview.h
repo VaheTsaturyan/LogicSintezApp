@@ -5,6 +5,7 @@
 #include <QGraphicsView>
 #include <QVBoxLayout>
 
+
 #include "./graphicScen.h"
 
 namespace gui

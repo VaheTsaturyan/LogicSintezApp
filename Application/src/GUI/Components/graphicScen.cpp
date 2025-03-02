@@ -18,7 +18,26 @@ QList<ScalableGraphicsItem*> CustomGraphicsScene::selectedScalableItems() const
     }
     return items;
 }
+/*
 
+AndGraphicsItem* CustomGraphicsScene::addScalableItem()
+{
+    AndGraphicsItem* item = new AndGraphicsItem();
+    addItem(item);
+    return item;
+}
+
+AndGraphicsItem* CustomGraphicsScene::addScalableItemAt(const QPointF &pos)
+{
+    AndGraphicsItem *item = addScalableItem();
+    item->setPos(pos);
+    return item;
+}
+*/
+
+
+
+/////////////////////////costo cod
 ScalableGraphicsItem* CustomGraphicsScene::addScalableItem()
 {
     ScalableGraphicsItem *item = new ScalableGraphicsItem();
@@ -32,6 +51,7 @@ ScalableGraphicsItem* CustomGraphicsScene::addScalableItemAt(const QPointF &pos)
     item->setPos(pos);
     return item;
 }
+/////////////////////////costo cod
 
 void CustomGraphicsScene::scaleUpSelected()
 {

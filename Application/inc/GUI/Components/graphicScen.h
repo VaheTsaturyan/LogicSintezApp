@@ -19,6 +19,8 @@ public:
 public slots:
     ScalableGraphicsItem* addScalableItem();
     ScalableGraphicsItem* addScalableItemAt(const QPointF &pos);
+    //AndGraphicsItem* addScalableItemAt(const QPointF &pos);
+    //AndGraphicsItem* addScalableItem();
     void scaleUpSelected();
     void scaleDownSelected();
 
