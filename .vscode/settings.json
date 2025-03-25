@@ -74,7 +74,12 @@
         "shared_mutex": "cpp",
         "qmainwindow": "cpp",
         "qapplication": "cpp",
-        "qicon": "cpp"
+        "qicon": "cpp",
+        "codecvt": "cpp",
+        "forward_list": "cpp",
+        "iomanip": "cpp",
+        "valarray": "cpp",
+        "set": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

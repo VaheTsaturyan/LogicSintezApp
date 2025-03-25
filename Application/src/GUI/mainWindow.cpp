@@ -3,6 +3,7 @@
 #include <QMenu>
 #include <QDebug>
 #include "mainWindow.h"
+#include <iostream>
 
 namespace gui
 {
@@ -47,6 +48,7 @@ void MainWindow::connectSignals()
     connect(fileMenu, &FileMenu::exitRequested, this, &MainWindow::close);
     connect(addProject, &AddProjectToolBar::actionTriggered, this, &MainWindow::addProjectDialog);
     connect(zoom, &ZoomToolBar::actionTriggered, this, &MainWindow::zoomH);
+    connect(undoRedoToolBar, &UndoRedoToolBar::actionTriggered, this, &MainWindow::redoActions);
 
     connect(dockWidget, SIGNAL(logicGateSelected(const QString&)), 
             this, SLOT(addLogicGate(const QString&)));
@@ -99,6 +101,11 @@ void MainWindow::zoomH(const QString &eventName)
 void MainWindow::addLogicGate(const QString &gateType)
 {
     circuitView->addLogicGate(gateType);
+}
+
+void MainWindow::redoActions(const QString &actionName)
+{
+    std::cout<<actionName.toStdString()<<std::endl;
 }
 
 void MainWindow::updateUndoRedoActions()

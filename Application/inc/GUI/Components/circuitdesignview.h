@@ -38,7 +38,7 @@ signals:
     void sceneChanged();
     
 private:
-    CustomGraphicsScene *m_scene;
+    CustomGraphicsScene* m_scene;
     QGraphicsView *m_view;
     QVBoxLayout *m_layout;
     

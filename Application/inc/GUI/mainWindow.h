@@ -25,14 +25,10 @@ private slots:
     void openFile();
     void saveFile();
     void addProjectDialog();
-    // New slots to handle zoom actions
     void zoomH(const QString& eventName);
-    
-    // New slot to handle logic gate addition
     void addLogicGate(const QString &gateType);
-    
-    // New slots for undo/redo
     void updateUndoRedoActions();
+    void redoActions(const QString& actionName);
 
 private:
     LogicGatesDockWidget* dockWidget;    

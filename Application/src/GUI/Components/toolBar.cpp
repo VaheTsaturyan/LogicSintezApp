@@ -12,6 +12,7 @@ UndoRedoToolBar::UndoRedoToolBar(QWidget *parent)
     : QToolBar(parent)
 {
     setupActions();
+    
 }
 
 void UndoRedoToolBar::setupActions()

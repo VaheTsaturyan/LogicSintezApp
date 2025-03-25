@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -O2 -std=gnu++1z -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../../LogicSintesApp -I. -I../Application/inc -I../Application/inc/GUI -I../Application/inc/GUI/Components -I../Application/inc/Dacumemnt -I../Application/inc/Menegment -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++
+INCPATH       = -I../../LogicSintesApp -I. -I../Application/inc -I../Application/inc/GUI -I../Application/inc/GUI/Components -IApplication/inc/Dacumemnt -I../Application/inc/Menegment -I../../../Surelog/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++
 QMAKE         = /usr/lib/qt5/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = LogicSintesApp1.0.0
 DISTDIR = /home/vts/repos/LogicSintesApp/build/.tmp/LogicSintesApp1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1
-LIBS          = $(SUBLIBS) /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Core.so -lGL -lpthread   
+LIBS          = $(SUBLIBS) -lboost_json /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Core.so -lGL -lpthread   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -61,7 +61,11 @@ SOURCES       = ../Application/main.cpp \
 		../Application/src/GUI/Components/menu.cpp \
 		../Application/src/GUI/Components/circuitdesignview.cpp \
 		../Application/src/GUI/Components/graphicItem.cpp \
-		../Application/src/GUI/Components/graphicScen.cpp qrc_Resources.cpp \
+		../Application/src/GUI/Components/graphicScen.cpp \
+		../Application/inc/Editor/editor.cpp \
+		../Application/inc/Sterializers/Sterializer.cpp \
+		../Application/src/Dacumemnt/document.cpp \
+		../Application/src/Dacumemnt/gets.cpp qrc_Resources.cpp \
 		moc_application.cpp \
 		moc_mainWindow.cpp \
 		moc_dockWidget.cpp \
@@ -81,6 +85,10 @@ OBJECTS       = main.o \
 		circuitdesignview.o \
 		graphicItem.o \
 		graphicScen.o \
+		editor.o \
+		Sterializer.o \
+		document.o \
+		gets.o \
 		qrc_Resources.o \
 		moc_application.o \
 		moc_mainWindow.o \
@@ -176,7 +184,12 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../Application/inc/GUI/Components/menu.h \
 		../Application/inc/GUI/Components/circuitdesignview.h \
 		../Application/inc/GUI/Components/graphicItem.h \
-		../Application/inc/GUI/Components/graphicScen.h ../Application/main.cpp \
+		../Application/inc/GUI/Components/graphicScen.h \
+		../Application/inc/Document/document.h \
+		../Application/inc/Document/gets.h \
+		../Application/inc/Editor/action.h \
+		../Application/inc/Editor/editor.h \
+		../Application/inc/Sterializers/Sterializer.h ../Application/main.cpp \
 		../Application/src/application.cpp \
 		../Application/src/GUI/mainWindow.cpp \
 		../Application/src/GUI/Components/dockWidget.cpp \
@@ -185,7 +198,11 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../Application/src/GUI/Components/menu.cpp \
 		../Application/src/GUI/Components/circuitdesignview.cpp \
 		../Application/src/GUI/Components/graphicItem.cpp \
-		../Application/src/GUI/Components/graphicScen.cpp
+		../Application/src/GUI/Components/graphicScen.cpp \
+		../Application/inc/Editor/editor.cpp \
+		../Application/inc/Sterializers/Sterializer.cpp \
+		../Application/src/Dacumemnt/document.cpp \
+		../Application/src/Dacumemnt/gets.cpp
 QMAKE_TARGET  = LogicSintesApp
 DESTDIR       = 
 TARGET        = LogicSintesApp
@@ -372,8 +389,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../Resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Application/inc/application.h ../Application/inc/GUI/mainWindow.h ../Application/inc/GUI/Components/dockWidget.h ../Application/inc/GUI/Components/fileDialog.h ../Application/inc/GUI/Components/toolBar.h ../Application/inc/GUI/Components/menu.h ../Application/inc/GUI/Components/circuitdesignview.h ../Application/inc/GUI/Components/graphicItem.h ../Application/inc/GUI/Components/graphicScen.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Application/main.cpp ../Application/src/application.cpp ../Application/src/GUI/mainWindow.cpp ../Application/src/GUI/Components/dockWidget.cpp ../Application/src/GUI/Components/fileDialog.cpp ../Application/src/GUI/Components/toolBar.cpp ../Application/src/GUI/Components/menu.cpp ../Application/src/GUI/Components/circuitdesignview.cpp ../Application/src/GUI/Components/graphicItem.cpp ../Application/src/GUI/Components/graphicScen.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Application/inc/application.h ../Application/inc/GUI/mainWindow.h ../Application/inc/GUI/Components/dockWidget.h ../Application/inc/GUI/Components/fileDialog.h ../Application/inc/GUI/Components/toolBar.h ../Application/inc/GUI/Components/menu.h ../Application/inc/GUI/Components/circuitdesignview.h ../Application/inc/GUI/Components/graphicItem.h ../Application/inc/GUI/Components/graphicScen.h ../Application/inc/Document/document.h ../Application/inc/Document/gets.h ../Application/inc/Editor/action.h ../Application/inc/Editor/editor.h ../Application/inc/Sterializers/Sterializer.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Application/main.cpp ../Application/src/application.cpp ../Application/src/GUI/mainWindow.cpp ../Application/src/GUI/Components/dockWidget.cpp ../Application/src/GUI/Components/fileDialog.cpp ../Application/src/GUI/Components/toolBar.cpp ../Application/src/GUI/Components/menu.cpp ../Application/src/GUI/Components/circuitdesignview.cpp ../Application/src/GUI/Components/graphicItem.cpp ../Application/src/GUI/Components/graphicScen.cpp ../Application/inc/Editor/editor.cpp ../Application/inc/Sterializers/Sterializer.cpp ../Application/src/Dacumemnt/document.cpp ../Application/src/Dacumemnt/gets.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -421,7 +438,7 @@ compiler_moc_header_clean:
 moc_application.cpp: ../Application/inc/application.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/vts/repos/LogicSintesApp/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/vts/repos/LogicSintesApp -I/home/vts/repos/LogicSintesApp/Application/inc -I/home/vts/repos/LogicSintesApp/Application/inc/GUI -I/home/vts/repos/LogicSintesApp/Application/inc/GUI/Components -I/home/vts/repos/LogicSintesApp/Application/inc/Dacumemnt -I/home/vts/repos/LogicSintesApp/Application/inc/Menegment -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Application/inc/application.h -o moc_application.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/vts/repos/LogicSintesApp/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/vts/repos/LogicSintesApp -I/home/vts/repos/LogicSintesApp/Application/inc -I/home/vts/repos/LogicSintesApp/Application/inc/GUI -I/home/vts/repos/LogicSintesApp/Application/inc/GUI/Components -I/home/vts/repos/LogicSintesApp/Application/inc/Dacumemnt -I/home/vts/repos/LogicSintesApp/Application/inc/Menegment -I/home/vts/Surelog/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Application/inc/application.h -o moc_application.cpp
 
 moc_mainWindow.cpp: ../Application/inc/GUI/mainWindow.h \
 		../Application/inc/GUI/Components/dockWidget.h \
@@ -433,45 +450,45 @@ moc_mainWindow.cpp: ../Application/inc/GUI/mainWindow.h \
 		../Application/inc/GUI/Components/graphicItem.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/vts/repos/LogicSintesApp/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/vts/repos/LogicSintesApp -I/home/vts/repos/LogicSintesApp/Application/inc -I/home/vts/repos/LogicSintesApp/Application/inc/GUI -I/home/vts/repos/LogicSintesApp/Application/inc/GUI/Components -I/home/vts/repos/LogicSintesApp/Application/inc/Dacumemnt -I/home/vts/repos/LogicSintesApp/Application/inc/Menegment -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Application/inc/GUI/mainWindow.h -o moc_mainWindow.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/vts/repos/LogicSintesApp/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/vts/repos/LogicSintesApp -I/home/vts/repos/LogicSintesApp/Application/inc -I/home/vts/repos/LogicSintesApp/Application/inc/GUI -I/home/vts/repos/LogicSintesApp/Application/inc/GUI/Components -I/home/vts/repos/LogicSintesApp/Application/inc/Dacumemnt -I/home/vts/repos/LogicSintesApp/Application/inc/Menegment -I/home/vts/Surelog/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Application/inc/GUI/mainWindow.h -o moc_mainWindow.cpp
 
 moc_dockWidget.cpp: ../Application/inc/GUI/Components/dockWidget.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/vts/repos/LogicSintesApp/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/vts/repos/LogicSintesApp -I/home/vts/repos/LogicSintesApp/Application/inc -I/home/vts/repos/LogicSintesApp/Application/inc/GUI -I/home/vts/repos/LogicSintesApp/Application/inc/GUI/Components -I/home/vts/repos/LogicSintesApp/Application/inc/Dacumemnt -I/home/vts/repos/LogicSintesApp/Application/inc/Menegment -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Application/inc/GUI/Components/dockWidget.h -o moc_dockWidget.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/vts/repos/LogicSintesApp/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/vts/repos/LogicSintesApp -I/home/vts/repos/LogicSintesApp/Application/inc -I/home/vts/repos/LogicSintesApp/Application/inc/GUI -I/home/vts/repos/LogicSintesApp/Application/inc/GUI/Components -I/home/vts/repos/LogicSintesApp/Application/inc/Dacumemnt -I/home/vts/repos/LogicSintesApp/Application/inc/Menegment -I/home/vts/Surelog/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Application/inc/GUI/Components/dockWidget.h -o moc_dockWidget.cpp
 
 moc_fileDialog.cpp: ../Application/inc/GUI/Components/fileDialog.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/vts/repos/LogicSintesApp/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/vts/repos/LogicSintesApp -I/home/vts/repos/LogicSintesApp/Application/inc -I/home/vts/repos/LogicSintesApp/Application/inc/GUI -I/home/vts/repos/LogicSintesApp/Application/inc/GUI/Components -I/home/vts/repos/LogicSintesApp/Application/inc/Dacumemnt -I/home/vts/repos/LogicSintesApp/Application/inc/Menegment -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Application/inc/GUI/Components/fileDialog.h -o moc_fileDialog.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/vts/repos/LogicSintesApp/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/vts/repos/LogicSintesApp -I/home/vts/repos/LogicSintesApp/Application/inc -I/home/vts/repos/LogicSintesApp/Application/inc/GUI -I/home/vts/repos/LogicSintesApp/Application/inc/GUI/Components -I/home/vts/repos/LogicSintesApp/Application/inc/Dacumemnt -I/home/vts/repos/LogicSintesApp/Application/inc/Menegment -I/home/vts/Surelog/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Application/inc/GUI/Components/fileDialog.h -o moc_fileDialog.cpp
 
 moc_toolBar.cpp: ../Application/inc/GUI/Components/toolBar.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/vts/repos/LogicSintesApp/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/vts/repos/LogicSintesApp -I/home/vts/repos/LogicSintesApp/Application/inc -I/home/vts/repos/LogicSintesApp/Application/inc/GUI -I/home/vts/repos/LogicSintesApp/Application/inc/GUI/Components -I/home/vts/repos/LogicSintesApp/Application/inc/Dacumemnt -I/home/vts/repos/LogicSintesApp/Application/inc/Menegment -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Application/inc/GUI/Components/toolBar.h -o moc_toolBar.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/vts/repos/LogicSintesApp/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/vts/repos/LogicSintesApp -I/home/vts/repos/LogicSintesApp/Application/inc -I/home/vts/repos/LogicSintesApp/Application/inc/GUI -I/home/vts/repos/LogicSintesApp/Application/inc/GUI/Components -I/home/vts/repos/LogicSintesApp/Application/inc/Dacumemnt -I/home/vts/repos/LogicSintesApp/Application/inc/Menegment -I/home/vts/Surelog/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Application/inc/GUI/Components/toolBar.h -o moc_toolBar.cpp
 
 moc_menu.cpp: ../Application/inc/GUI/Components/menu.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/vts/repos/LogicSintesApp/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/vts/repos/LogicSintesApp -I/home/vts/repos/LogicSintesApp/Application/inc -I/home/vts/repos/LogicSintesApp/Application/inc/GUI -I/home/vts/repos/LogicSintesApp/Application/inc/GUI/Components -I/home/vts/repos/LogicSintesApp/Application/inc/Dacumemnt -I/home/vts/repos/LogicSintesApp/Application/inc/Menegment -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Application/inc/GUI/Components/menu.h -o moc_menu.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/vts/repos/LogicSintesApp/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/vts/repos/LogicSintesApp -I/home/vts/repos/LogicSintesApp/Application/inc -I/home/vts/repos/LogicSintesApp/Application/inc/GUI -I/home/vts/repos/LogicSintesApp/Application/inc/GUI/Components -I/home/vts/repos/LogicSintesApp/Application/inc/Dacumemnt -I/home/vts/repos/LogicSintesApp/Application/inc/Menegment -I/home/vts/Surelog/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Application/inc/GUI/Components/menu.h -o moc_menu.cpp
 
 moc_circuitdesignview.cpp: ../Application/inc/GUI/Components/circuitdesignview.h \
 		../Application/inc/GUI/Components/graphicScen.h \
 		../Application/inc/GUI/Components/graphicItem.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/vts/repos/LogicSintesApp/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/vts/repos/LogicSintesApp -I/home/vts/repos/LogicSintesApp/Application/inc -I/home/vts/repos/LogicSintesApp/Application/inc/GUI -I/home/vts/repos/LogicSintesApp/Application/inc/GUI/Components -I/home/vts/repos/LogicSintesApp/Application/inc/Dacumemnt -I/home/vts/repos/LogicSintesApp/Application/inc/Menegment -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Application/inc/GUI/Components/circuitdesignview.h -o moc_circuitdesignview.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/vts/repos/LogicSintesApp/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/vts/repos/LogicSintesApp -I/home/vts/repos/LogicSintesApp/Application/inc -I/home/vts/repos/LogicSintesApp/Application/inc/GUI -I/home/vts/repos/LogicSintesApp/Application/inc/GUI/Components -I/home/vts/repos/LogicSintesApp/Application/inc/Dacumemnt -I/home/vts/repos/LogicSintesApp/Application/inc/Menegment -I/home/vts/Surelog/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Application/inc/GUI/Components/circuitdesignview.h -o moc_circuitdesignview.cpp
 
 moc_graphicItem.cpp: ../Application/inc/GUI/Components/graphicItem.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/vts/repos/LogicSintesApp/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/vts/repos/LogicSintesApp -I/home/vts/repos/LogicSintesApp/Application/inc -I/home/vts/repos/LogicSintesApp/Application/inc/GUI -I/home/vts/repos/LogicSintesApp/Application/inc/GUI/Components -I/home/vts/repos/LogicSintesApp/Application/inc/Dacumemnt -I/home/vts/repos/LogicSintesApp/Application/inc/Menegment -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Application/inc/GUI/Components/graphicItem.h -o moc_graphicItem.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/vts/repos/LogicSintesApp/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/vts/repos/LogicSintesApp -I/home/vts/repos/LogicSintesApp/Application/inc -I/home/vts/repos/LogicSintesApp/Application/inc/GUI -I/home/vts/repos/LogicSintesApp/Application/inc/GUI/Components -I/home/vts/repos/LogicSintesApp/Application/inc/Dacumemnt -I/home/vts/repos/LogicSintesApp/Application/inc/Menegment -I/home/vts/Surelog/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Application/inc/GUI/Components/graphicItem.h -o moc_graphicItem.cpp
 
 moc_graphicScen.cpp: ../Application/inc/GUI/Components/graphicScen.h \
 		../Application/inc/GUI/Components/graphicItem.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/vts/repos/LogicSintesApp/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/vts/repos/LogicSintesApp -I/home/vts/repos/LogicSintesApp/Application/inc -I/home/vts/repos/LogicSintesApp/Application/inc/GUI -I/home/vts/repos/LogicSintesApp/Application/inc/GUI/Components -I/home/vts/repos/LogicSintesApp/Application/inc/Dacumemnt -I/home/vts/repos/LogicSintesApp/Application/inc/Menegment -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Application/inc/GUI/Components/graphicScen.h -o moc_graphicScen.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/vts/repos/LogicSintesApp/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/vts/repos/LogicSintesApp -I/home/vts/repos/LogicSintesApp/Application/inc -I/home/vts/repos/LogicSintesApp/Application/inc/GUI -I/home/vts/repos/LogicSintesApp/Application/inc/GUI/Components -I/home/vts/repos/LogicSintesApp/Application/inc/Dacumemnt -I/home/vts/repos/LogicSintesApp/Application/inc/Menegment -I/home/vts/Surelog/include -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Application/inc/GUI/Components/graphicScen.h -o moc_graphicScen.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -537,6 +554,22 @@ graphicItem.o: ../Application/src/GUI/Components/graphicItem.cpp ../Application/
 graphicScen.o: ../Application/src/GUI/Components/graphicScen.cpp ../Application/inc/GUI/Components/graphicScen.h \
 		../Application/inc/GUI/Components/graphicItem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o graphicScen.o ../Application/src/GUI/Components/graphicScen.cpp
+
+editor.o: ../Application/inc/Editor/editor.cpp ../Application/inc/Editor/editor.h \
+		../Application/inc/Editor/action.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o editor.o ../Application/inc/Editor/editor.cpp
+
+Sterializer.o: ../Application/inc/Sterializers/Sterializer.cpp ../Application/inc/Sterializers/Sterializer.h \
+		../Application/inc/Document/document.h \
+		../Application/inc/Document/gets.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Sterializer.o ../Application/inc/Sterializers/Sterializer.cpp
+
+document.o: ../Application/src/Dacumemnt/document.cpp ../Application/inc/Document/document.h \
+		../Application/inc/Document/gets.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o document.o ../Application/src/Dacumemnt/document.cpp
+
+gets.o: ../Application/src/Dacumemnt/gets.cpp ../Application/inc/Document/gets.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gets.o ../Application/src/Dacumemnt/gets.cpp
 
 qrc_Resources.o: qrc_Resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_Resources.o qrc_Resources.cpp

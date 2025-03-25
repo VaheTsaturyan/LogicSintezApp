@@ -3,16 +3,16 @@
 namespace gui{
 
 
-CustomGraphicsScene::CustomGraphicsScene(QObject *parent)
+    CustomGraphicsScene::CustomGraphicsScene(QObject *parent)
     : QGraphicsScene(parent)
 {
 }
 
-QList<ScalableGraphicsItem*> CustomGraphicsScene::selectedScalableItems() const
+QList<AGraphicsItem*> CustomGraphicsScene::selectedScalableItems() const
 {
-    QList<ScalableGraphicsItem*> items;
+    QList<AGraphicsItem*> items;
     for (QGraphicsItem *item : selectedItems()) {
-        ScalableGraphicsItem *scalableItem = qgraphicsitem_cast<ScalableGraphicsItem*>(item);
+        AGraphicsItem *scalableItem = qgraphicsitem_cast<AGraphicsItem*>(item);
         if (scalableItem)
             items.append(scalableItem);
     }
@@ -20,14 +20,14 @@ QList<ScalableGraphicsItem*> CustomGraphicsScene::selectedScalableItems() const
 }
 /*
 
-AndGraphicsItem* CustomGraphicsScene::addScalableItem()
+AndGraphicsItem* AGraphicsItem::addScalableItem()
 {
     AndGraphicsItem* item = new AndGraphicsItem();
     addItem(item);
     return item;
 }
 
-AndGraphicsItem* CustomGraphicsScene::addScalableItemAt(const QPointF &pos)
+AndGraphicsItem* AGraphicsItem::addScalableItemAt(const QPointF &pos)
 {
     AndGraphicsItem *item = addScalableItem();
     item->setPos(pos);
@@ -38,16 +38,16 @@ AndGraphicsItem* CustomGraphicsScene::addScalableItemAt(const QPointF &pos)
 
 
 /////////////////////////costo cod
-ScalableGraphicsItem* CustomGraphicsScene::addScalableItem()
+AGraphicsItem* CustomGraphicsScene::addScalableItem()
 {
-    ScalableGraphicsItem *item = new ScalableGraphicsItem();
+    AGraphicsItem *item = new AndGraphicsItem();
     addItem(item);
     return item;
 }
 
-ScalableGraphicsItem* CustomGraphicsScene::addScalableItemAt(const QPointF &pos)
+AGraphicsItem* CustomGraphicsScene::addScalableItemAt(const QPointF &pos)
 {
-    ScalableGraphicsItem *item = addScalableItem();
+    AGraphicsItem *item = addScalableItem();
     item->setPos(pos);
     return item;
 }
@@ -55,13 +55,13 @@ ScalableGraphicsItem* CustomGraphicsScene::addScalableItemAt(const QPointF &pos)
 
 void CustomGraphicsScene::scaleUpSelected()
 {
-    for (ScalableGraphicsItem *item : selectedScalableItems())
+    for (AGraphicsItem *item : selectedScalableItems())
         item->scaleUp();
 }
 
 void CustomGraphicsScene::scaleDownSelected()
 {
-    for (ScalableGraphicsItem *item : selectedScalableItems())
+    for (AGraphicsItem *item : selectedScalableItems())
         item->scaleDown();
 }
 

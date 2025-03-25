@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_gui__CustomGraphicsScene_t {
     QByteArrayData data[8];
-    char stringdata0[120];
+    char stringdata0[113];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,17 +34,17 @@ static const qt_meta_stringdata_gui__CustomGraphicsScene_t qt_meta_stringdata_gu
     {
 QT_MOC_LITERAL(0, 0, 24), // "gui::CustomGraphicsScene"
 QT_MOC_LITERAL(1, 25, 15), // "addScalableItem"
-QT_MOC_LITERAL(2, 41, 21), // "ScalableGraphicsItem*"
-QT_MOC_LITERAL(3, 63, 0), // ""
-QT_MOC_LITERAL(4, 64, 17), // "addScalableItemAt"
-QT_MOC_LITERAL(5, 82, 3), // "pos"
-QT_MOC_LITERAL(6, 86, 15), // "scaleUpSelected"
-QT_MOC_LITERAL(7, 102, 17) // "scaleDownSelected"
+QT_MOC_LITERAL(2, 41, 14), // "AGraphicsItem*"
+QT_MOC_LITERAL(3, 56, 0), // ""
+QT_MOC_LITERAL(4, 57, 17), // "addScalableItemAt"
+QT_MOC_LITERAL(5, 75, 3), // "pos"
+QT_MOC_LITERAL(6, 79, 15), // "scaleUpSelected"
+QT_MOC_LITERAL(7, 95, 17) // "scaleDownSelected"
 
     },
     "gui::CustomGraphicsScene\0addScalableItem\0"
-    "ScalableGraphicsItem*\0\0addScalableItemAt\0"
-    "pos\0scaleUpSelected\0scaleDownSelected"
+    "AGraphicsItem*\0\0addScalableItemAt\0pos\0"
+    "scaleUpSelected\0scaleDownSelected"
 };
 #undef QT_MOC_LITERAL
 
@@ -82,10 +82,10 @@ void gui::CustomGraphicsScene::qt_static_metacall(QObject *_o, QMetaObject::Call
         auto *_t = static_cast<CustomGraphicsScene *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: { ScalableGraphicsItem* _r = _t->addScalableItem();
-            if (_a[0]) *reinterpret_cast< ScalableGraphicsItem**>(_a[0]) = std::move(_r); }  break;
-        case 1: { ScalableGraphicsItem* _r = _t->addScalableItemAt((*reinterpret_cast< const QPointF(*)>(_a[1])));
-            if (_a[0]) *reinterpret_cast< ScalableGraphicsItem**>(_a[0]) = std::move(_r); }  break;
+        case 0: { AGraphicsItem* _r = _t->addScalableItem();
+            if (_a[0]) *reinterpret_cast< AGraphicsItem**>(_a[0]) = std::move(_r); }  break;
+        case 1: { AGraphicsItem* _r = _t->addScalableItemAt((*reinterpret_cast< const QPointF(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< AGraphicsItem**>(_a[0]) = std::move(_r); }  break;
         case 2: _t->scaleUpSelected(); break;
         case 3: _t->scaleDownSelected(); break;
         default: ;

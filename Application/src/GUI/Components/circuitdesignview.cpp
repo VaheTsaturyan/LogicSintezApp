@@ -61,14 +61,14 @@ void CircuitDesignView::addLogicGate(const QString &gateType)
 {
     // Create a scalable graphics item styled as a logic gate
     //AndGraphicsItem *item = m_scene->addScalableItem();
-    ScalableGraphicsItem *item = m_scene->addScalableItem();
+    AGraphicsItem *item = m_scene->addScalableItem();
     
     // Position at view center
     QPointF viewCenter = m_view->mapToScene(m_view->viewport()->rect().center());
     item->setPos(viewCenter);
     
     // In a real implementation, you would set the appearance based on gateType
-    // For example, create different subclasses of ScalableGraphicsItem for
+    // For example, create different subclasses of AGraphicsItem for
     // different types of logic gates (AND, OR, NOT, etc.)
     
     // Emit the scene changed signal

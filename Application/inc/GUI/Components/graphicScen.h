@@ -14,11 +14,11 @@ class CustomGraphicsScene : public QGraphicsScene
 
 public:
     CustomGraphicsScene(QObject *parent = nullptr);
-    QList<ScalableGraphicsItem*> selectedScalableItems() const;
+    QList<AGraphicsItem*> selectedScalableItems() const;
 
 public slots:
-    ScalableGraphicsItem* addScalableItem();
-    ScalableGraphicsItem* addScalableItemAt(const QPointF &pos);
+    AGraphicsItem* addScalableItem();
+    AGraphicsItem* addScalableItemAt(const QPointF &pos);
     //AndGraphicsItem* addScalableItemAt(const QPointF &pos);
     //AndGraphicsItem* addScalableItem();
     void scaleUpSelected();
