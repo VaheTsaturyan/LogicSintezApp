@@ -79,7 +79,10 @@
         "forward_list": "cpp",
         "iomanip": "cpp",
         "valarray": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "qtimer": "cpp",
+        "qgraphicsscenewheelevent": "cpp",
+        "qlist": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

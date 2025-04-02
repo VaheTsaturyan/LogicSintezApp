@@ -16,7 +16,7 @@ AddGate::AddGate(std::shared_ptr<doc::Document> doc, std::shared_ptr<doc::Gate> 
 
 void AddGate::doo()
 {
-    doc_->addGate( gate_ );
+    doc_->addGate( *gate_ );
 }
 
 std::shared_ptr<IAction> AddGate::returnInversAction()
@@ -37,12 +37,12 @@ RemovGate::RemovGate( std::shared_ptr<doc::Document> doc, std::shared_ptr<doc::G
 
 void RemovGate::doo()
 {
-    doc_->removeaGate( gate_->setId() );
+    doc_->removeaGate( gate_->getId() );
 }
 
 std::shared_ptr<IAction> RemovGate::returnInversAction()
 {
-    return std::make_shared<AddGate>( doc_, gate_ )
+    return std::make_shared<AddGate>( doc_, gate_ );
 }
 
 
@@ -60,8 +60,8 @@ AddEdge::AddEdge(std::shared_ptr<doc::Gate> gateC, unsigned int port , std::shar
 
 void AddEdge::doo()
 {
-    gateC_->addConect( gate2_->getId() );
-    gateI_->addInput( port_, gate1_->getId())
+    gateC_->addConect( gateI_->getId() );
+    gateI_->addInput( port_, gateC_->getId());
 }
 
 std::shared_ptr<IAction> AddEdge::returnInversAction()
@@ -77,8 +77,8 @@ std::shared_ptr<IAction> AddEdge::returnInversAction()
 //////////////////////////////////////////////////////////////
 RemovEdge::RemovEdge(std::shared_ptr<doc::Gate> gateC, unsigned int port, std::shared_ptr<doc::Gate> gateI )
 {
-    gateC_ = gateC_;
-    gateI_ = gateI_;
+    gateC_ = gateC;
+    gateI_ = gateI;
     port_ = port;
 }
 

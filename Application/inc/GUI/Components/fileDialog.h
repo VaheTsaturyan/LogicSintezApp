@@ -19,7 +19,7 @@ class SaveJsonFileDialog : public QDialog {
 
 public:
     explicit SaveJsonFileDialog(QWidget* parent = nullptr);
-    ~SaveJsonFileDialog();
+    ~SaveJsonFileDialog() = default;
 
 signals:
     void jsonFilePathSelected(const QString& fullPath);

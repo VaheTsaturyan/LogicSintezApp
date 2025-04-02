@@ -27,11 +27,12 @@ SaveJsonFileDialog::SaveJsonFileDialog(QWidget* parent)
 
     QObject::connect(this, &SaveJsonFileDialog::jsonFilePathSelected, MyApplication::instance(), &MyApplication::saveJsonFile);
 }
-
+/*
 SaveJsonFileDialog::~SaveJsonFileDialog() {
     // Qt will handle deletion of child widgets
 }
 
+*/
 void SaveJsonFileDialog::setupUI() {
     // Create widgets
     folderLabel = new QLabel("Selected Folder:", this);

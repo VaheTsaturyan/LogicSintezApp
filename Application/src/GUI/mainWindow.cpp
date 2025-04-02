@@ -3,6 +3,7 @@
 #include <QMenu>
 #include <QDebug>
 #include "mainWindow.h"
+#include "../application.h"
 #include <iostream>
 
 namespace gui
@@ -42,19 +43,23 @@ void MainWindow::addComponents()
 void MainWindow::connectSignals()
 {
 
-    connect(fileMenu, &FileMenu::newFileRequested, this, &MainWindow::newFile);
-    connect(fileMenu, &FileMenu::openFileRequested, this, &MainWindow::openFile);
-    connect(fileMenu, &FileMenu::saveFileRequested, this, &MainWindow::saveFile);
-    connect(fileMenu, &FileMenu::exitRequested, this, &MainWindow::close);
-    connect(addProject, &AddProjectToolBar::actionTriggered, this, &MainWindow::addProjectDialog);
-    connect(zoom, &ZoomToolBar::actionTriggered, this, &MainWindow::zoomH);
-    connect(undoRedoToolBar, &UndoRedoToolBar::actionTriggered, this, &MainWindow::redoActions);
+    connect( fileMenu, &FileMenu::newFileRequested, this, &MainWindow::newFile );
+    connect( fileMenu, &FileMenu::openFileRequested, this, &MainWindow::openFile );
+    connect( fileMenu, &FileMenu::saveFileRequested, this, &MainWindow::saveFile );
+    connect( fileMenu, &FileMenu::exitRequested, this, &MainWindow::close );
+    connect( addProject, &AddProjectToolBar::actionTriggered, this, &MainWindow::addProjectDialog );
+    connect( zoom, &ZoomToolBar::actionTriggered, this, &MainWindow::zoomH );
+    connect( undoRedoToolBar, &UndoRedoToolBar::actionTriggered, this, &MainWindow::redoActions );
 
-    connect(dockWidget, SIGNAL(logicGateSelected(const QString&)), 
+    connect( dockWidget, SIGNAL(logicGateSelected(const QString&)), 
             this, SLOT(addLogicGate(const QString&)));
     
-    connect(circuitView, &CircuitDesignView::sceneChanged, 
+    connect( circuitView, &CircuitDesignView::sceneChanged, 
             this, &MainWindow::updateUndoRedoActions);
+
+    connect( this, &MainWindow::addGate, MyApplication::instance(), &MyApplication::addGateInDoc );
+    connect( this, &MainWindow::addConnect, MyApplication::instance(), &MyApplication::addConnect );
+    connect( MyApplication::instance(), &MyApplication::SignaLLineAndGraphicSchenBridg, this, &MainWindow::conectFiltr );
     
     // Connect undo/redo toolbar to QUndoStack (assuming it has one)
     // This would depend on your UndoRedoToolBar implementation
@@ -81,31 +86,43 @@ void MainWindow::saveFile()
     saveDialog->show();
 }
 
-void MainWindow::addProjectDialog()
+void MainWindow::addProjectDialog ()
 {
     AddProjectFileDialog* addProjectDialog = new AddProjectFileDialog(this);
     addProjectDialog->show();
 }
 
-void MainWindow::zoomH(const QString &eventName)
+void MainWindow::zoomH( const QString &eventName )
 {
-    if(eventName == "zoomIn" ){
-        circuitView->zoomIn();
-    }else if("zoomOut"){
-        circuitView->zoomOut();
-    }else if("resetZoom"){
-        circuitView->resetZoom();
+    if( eventName == "zoomIn" ){
+        circuitView->zoomIn ();
+    }else if( "zoomOut" ){
+        circuitView->zoomOut ();
+    }else if( "resetZoom" ){
+        circuitView->resetZoom ();
     }
 }
 
-void MainWindow::addLogicGate(const QString &gateType)
+void MainWindow::addLogicGate( const QString &gateType )
 {
-    circuitView->addLogicGate(gateType);
+    circuitView->addLogicGate( gateType );
+    emit addGate( gateType );
+
 }
 
-void MainWindow::redoActions(const QString &actionName)
+void MainWindow::redoActions( const QString &actionName )
 {
     std::cout<<actionName.toStdString()<<std::endl;
+}
+
+void MainWindow::conectFiltr(const QPointF &sourcePoint, const QPointF &targetPoint)
+{
+    CustomGraphicsScene* schen =  circuitView->scene ();
+    AGraphicsItem* itemC = qgraphicsitem_cast<AGraphicsItem*>(schen->itemAt( sourcePoint, QTransform() ));
+    AGraphicsItem* itemI = qgraphicsitem_cast<AGraphicsItem*>(schen->itemAt( targetPoint, QTransform() ));
+    if ( itemC == nullptr && itemI == nullptr ) { return; }
+
+    emit addConnect( itemC, itemI  );
 }
 
 void MainWindow::updateUndoRedoActions()

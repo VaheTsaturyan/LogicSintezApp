@@ -65,7 +65,8 @@ LogicGatesDockWidget::LogicGatesDockWidget(QWidget *parent)
     addLogicGate("NAND", "/home/vts/repos/LogicSintesApp/Resources/LogicGates/nand.png");
     addLogicGate("NOR", "/home/vts/repos/LogicSintesApp/Resources/LogicGates/nor.png");
     addLogicGate("NOT", "/home/vts/repos/LogicSintesApp/Resources/LogicGates/not.png");
-
+    addLogicGate("XOR", "/home/vts/repos/LogicSintesApp/Resources/LogicGates/xor.png");
+    addLogicGate("XNOR", "/home/vts/repos/LogicSintesApp/Resources/LogicGates/xnor.png");
     // Create Previous Projects section
     QLabel *projectsLabel = new QLabel("Previous Projects", mainWidget);
     projectsLabel->setStyleSheet("font-weight: bold;");
