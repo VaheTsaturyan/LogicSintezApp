@@ -64,6 +64,7 @@ void MyApplication::lineAndGraphicSchenBridg(const QPointF &sourcePoint, const Q
 void MyApplication::addConnect( gui::AGraphicsItem *ithemC, gui::AGraphicsItem *ithemI)
 {
     std::cout<<"addConnect\n";
+
 }
 
 void MyApplication::openJsonFile(const QString &path)
