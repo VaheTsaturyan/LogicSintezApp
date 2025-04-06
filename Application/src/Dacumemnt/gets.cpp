@@ -70,6 +70,15 @@ unsigned int Gate::getInput(unsigned int inputPort) const
     return 0;
 }
 
+unsigned int Gate::getInputCaount() const
+{
+    return this->inputs.size();
+}
+
+unsigned int Gate::getConnectCount() const
+{
+    return this->conects.size();
+}
 unsigned int Gate::getId() const
 {
     return id;

@@ -26,6 +26,8 @@ public:
     std::unordered_map<unsigned int, unsigned int>& getInputs();
     const std::string& getType() const ;
     unsigned int getInput(unsigned int inputPort) const;
+    unsigned int getInputCaount() const;
+    unsigned int getConnectCount() const;
     unsigned int getId() const ;
 
 
